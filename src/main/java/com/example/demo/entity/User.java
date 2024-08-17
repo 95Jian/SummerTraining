@@ -8,13 +8,14 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class User {
+public class user {
 
     @TableId(value = "id",type= IdType.AUTO)
     private int id;
 
     private String user_name;
 
+    @JsonIgnore
     private String password;
 
     private String avatar_path;
@@ -22,12 +23,9 @@ public class User {
     private String phone;
 
     private String email;
-
     private String gender;
-
     private String address;
-
     private String introduction;
-
     private Date create_time;
+    private Date update_time;
 }
