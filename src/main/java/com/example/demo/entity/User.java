@@ -31,5 +31,4 @@ public class User {
 
     private Date create_time;
 
-    private Date update_time;
 }

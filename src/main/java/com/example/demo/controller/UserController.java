@@ -25,11 +25,15 @@ public class UserController {
     public Map<String, Object> login(@RequestBody User user) {
         Map<String, Object> response = new HashMap<>();
         User existingUser = userService.findByUsername(user.getUser_name());
+        existingUser.setUser_name(user.getUser_name());
         if (existingUser == null) {
             response.put("success", false);
             response.put("message", "用户不存在");
         } else if (user.getPassword().equals(existingUser.getPassword())) {
             response.put("success", true);
+
+            // 返回用户信息给前端
+            response.put("user", existingUser);
             // 添加登录记录
             LoginLog loginLog = new LoginLog();
             loginLog.setUserid(existingUser.getId());
