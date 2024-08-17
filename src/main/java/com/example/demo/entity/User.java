@@ -22,9 +22,14 @@ public class User {
     private String phone;
 
     private String email;
+
     private String gender;
+
     private String address;
+
     private String introduction;
+
     private Date create_time;
+
     private Date update_time;
 }
