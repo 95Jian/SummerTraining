@@ -23,11 +23,15 @@ public interface UserMapper extends BaseMapper<User> {
 
 
     @Update("UPDATE user SET username = #{username}, password = #{password}, phone = #{phone}, email = #{email}, " +
-            "gender = #{gender}, address = #{address}" +
+            "gender = #{gender}, address = #{address} " +
             "WHERE id = #{id}")
     void updateUser(User user);
 
     @Select("SELECT password FROM user WHERE id = #{id}")
     String getPasswordById(@Param("id") int id);
 
+    List<User> findUsersByUsername(@Param("username") String username, @Param("offset") int offset, @Param("size") int size);
+
+
+    int countUsersByUsername(@Param("username") String username);
 }

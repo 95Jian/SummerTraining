@@ -39,8 +39,17 @@ public class UserServiceImpl implements UserService {
         return userMapper.findUsers(offset, size);
     }
 
+
+    public List<User> searchUsersByUsername(String username, int offset, int size) {
+        return userMapper.findUsersByUsername(username, offset, size);
+    }
+
     public int countUsers() {
         return userMapper.countUsers();
+    }
+
+    public int countUsersByUsername(String username) {
+        return userMapper.countUsersByUsername(username);
     }
 
     @Override

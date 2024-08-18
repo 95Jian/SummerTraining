@@ -15,5 +15,6 @@ public interface UserService {
     void updateUser(User user);
     String findUsernameById(int id);
     int countUsers();
-
+    List<User> searchUsersByUsername(String username, int offset,int size);
+    int countUsersByUsername(String username);
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.UserMapper">
+
+    <!-- 根据用户名模糊查询用户 -->
+    <select id="findUsersByUsername" parameterType="map" resultType="com.example.demo.entity.User">
+        SELECT * FROM user
+        WHERE username LIKE CONCAT('%', #{username}, '%')
+        LIMIT #{size} OFFSET #{offset}
+    </select>
+
+    <!-- 根据用户名模糊查询用户数量 -->
+    <select id="countUsersByUsername" parameterType="String" resultType="int">
+        SELECT COUNT(*) FROM user
+        WHERE username LIKE CONCAT('%', #{username}, '%')
+    </select>
+
+
+</mapper>

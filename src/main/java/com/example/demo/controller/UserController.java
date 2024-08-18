@@ -112,6 +112,31 @@ public class UserController {
         return response;
     }
 
+    @GetMapping("/searchUsers")
+    public Map<String, Object> searchUsers(
+            @RequestParam String username,
+            @RequestParam int page,
+            @RequestParam int size) {
+        int offset = page * size;
+
+        List<User> userList = userService.searchUsersByUsername(username, offset, size);
+        Map<String, Object> response = new HashMap<>();
+        // 如果当前页没有用户，尝试获取上一页的用户列表
+        if (userList.isEmpty() && page > 0) {
+            page--; // 将页码减一
+
+            offset = page * size;
+            userList = userService.searchUsersByUsername(username, offset, size); // 获取上一页的用户列表
+        }
+
+        int totalUsers = userService.countUsersByUsername(username);
+        response.put("users", userList);
+        response.put("totalUsers", totalUsers);
+        response.put("currentPage", page);
+        response.put("totalPages", (int) Math.ceil((double) totalUsers / size));
+        return response;
+    }
+
     @DeleteMapping("/delete/{id}")
     public Map<String, Object> deleteUser(@PathVariable int id) {
         Map<String, Object> response = new HashMap<>();
@@ -124,6 +149,7 @@ public class UserController {
         }
         return response;
     }
+
     @PutMapping("/update/{id}")
     public Map<String, Object> updateUser(@PathVariable("id") int id, @RequestBody User user) {
         Map<String, Object> response = new HashMap<>();
