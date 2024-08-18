@@ -7,10 +7,16 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import java.util.List;
+
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
 
+    @Select("SELECT COUNT(*) FROM user")
+    int countUsers();
 
+    @Select("SELECT * FROM user LIMIT #{offset}, #{limit}")
+    List<User> findUsers(@Param("offset") int offset, @Param("limit") int limit);
 
     @Select("SELECT * FROM user WHERE username = #{userName}")
     User findByUsername(String userName);

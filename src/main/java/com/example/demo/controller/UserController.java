@@ -1,11 +1,14 @@
 package com.example.demo.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.entity.LoginLog;
 import com.example.demo.entity.User;
 import com.example.demo.service.LoginLogService;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Pageable;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -86,9 +89,27 @@ public class UserController {
     }
 
 
+//    @GetMapping("/getAllUsers")
+//    public List<User> getAllUsers() {
+//        return userService.getAllUsers();
+//    }
+
     @GetMapping("/getAllUsers")
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    public Map<String, Object> getUsers(@RequestParam(defaultValue = "0") int page,
+                                        @RequestParam(defaultValue = "10") int size) {
+        Map<String, Object> response = new HashMap<>();
+        List<User> users = userService.getPageUsers(page, size);
+        // 如果当前页没有用户，尝试获取上一页的用户列表
+        if (users.isEmpty() && page > 0) {
+            page--; // 将页码减一
+            users = userService.getPageUsers(page, size); // 获取上一页的用户列表
+        }
+        int totalUsers = userService.countUsers();
+        response.put("users", users);
+        response.put("totalUsers", totalUsers);
+        response.put("currentPage", page);
+        response.put("totalPages", (int) Math.ceil((double) totalUsers / size));
+        return response;
     }
 
     @DeleteMapping("/delete/{id}")

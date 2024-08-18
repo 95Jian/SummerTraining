@@ -4,6 +4,8 @@ import com.example.demo.entity.User;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,8 +27,20 @@ public class UserServiceImpl implements UserService {
         userMapper.insert(user);
     }
 
+    @Override
     public List<User> getAllUsers() {
         return userMapper.selectList(null);
+    }
+
+
+    @Override
+    public List<User> getPageUsers(int page, int size) {
+        int offset = page * size;
+        return userMapper.findUsers(offset, size);
+    }
+
+    public int countUsers() {
+        return userMapper.countUsers();
     }
 
     @Override
