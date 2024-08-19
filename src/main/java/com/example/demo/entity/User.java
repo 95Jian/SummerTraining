@@ -35,9 +35,6 @@ public class User {
     @TableField(value = "address")
     private String address;
 
-    @TableField(value = "introduction")
-    private String introduction;
-
     @TableField(value = "createTime")
     private String  createTime;
 

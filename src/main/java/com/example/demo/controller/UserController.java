@@ -1,14 +1,9 @@
 package com.example.demo.controller;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.demo.entity.LoginLog;
 import com.example.demo.entity.User;
-import com.example.demo.service.LoginLogService;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.data.domain.Pageable;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,8 +18,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private LoginLogService loginLogService;
 
     @PostMapping("/login")
     public Map<String, Object> login(@RequestBody User user) {
@@ -39,10 +32,6 @@ public class UserController {
             // 返回用户信息给前端
             response.put("user", existingUser);
             // 添加登录记录
-            LoginLog loginLog = new LoginLog();
-            loginLog.setUserid(existingUser.getId());
-            loginLog.setLogin_time(new Date());
-            loginLogService.saveLoginLog(loginLog);
         } else {
             response.put("success", false);
             response.put("message", "密码错误");
@@ -94,7 +83,7 @@ public class UserController {
 //        return userService.getAllUsers();
 //    }
 
-    @GetMapping("/getAllUsers")
+    @GetMapping("/getAll")
     public Map<String, Object> getUsers(@RequestParam(defaultValue = "0") int page,
                                         @RequestParam(defaultValue = "10") int size) {
         Map<String, Object> response = new HashMap<>();
@@ -112,7 +101,7 @@ public class UserController {
         return response;
     }
 
-    @GetMapping("/searchUsers")
+    @GetMapping("/search")
     public Map<String, Object> searchUsers(
             @RequestParam String username,
             @RequestParam int page,
