@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
-import java.io.Serializable;
 import java.util.Date;
 
 @Data
@@ -19,9 +18,5 @@ public class Permission {
 
     //权限描述
     private String description;
-
-    private Date create_time;
-
-    private Date update_time;
 
 }

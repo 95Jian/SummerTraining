@@ -11,7 +11,7 @@ public class RolePermission {
 
     @TableId(value = "id",type= IdType.AUTO)
     private int id;
-    private int role_id;
-    private int permission_id;
-    private Date create_time;
+    private int roleId;
+    private int permissionId;
+    private Date createTime;
 }
