@@ -17,6 +17,10 @@ public interface RoleMapper extends BaseMapper<Role> {
     @Select("SELECT * FROM Role")
     List<Role> findAllRoles();
 
+
+    @Select("SELECT id,name FROM Role")
+    List<Role> findAllRolesIdandName();
+
     @Select("SELECT * FROM Role WHERE id = #{id}")
     Role findRoleById(int id);
 

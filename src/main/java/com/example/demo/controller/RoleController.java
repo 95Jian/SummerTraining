@@ -28,6 +28,14 @@ public class RoleController {
         return response;
     }
 
+    @GetMapping("/getAllIDandName")
+    public Map<String, Object> getAllRolesIdandName() {
+        Map<String, Object> response = new HashMap<>();
+        List<Role> roles = roleService.getAllRolesIdandName();
+
+        response.put("roles", roles);
+        return response;
+    }
 
     @PostMapping("/add")
     public Map<String, Object> addRole(@RequestBody Role role) {

@@ -11,7 +11,7 @@ public class UserRole {
 
     @TableId(value = "id",type= IdType.AUTO)
     private int id;
-    private int user_id;
-    private int role_id;
-    private Date create_time;
+    private int userId;
+    private int roleId;
+    private Date createTime;
 }

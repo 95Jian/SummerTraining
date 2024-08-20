@@ -13,6 +13,8 @@ public interface RoleService {
 
     List<Role> getAllRoles();
 
+    List<Role> getAllRolesIdandName();
+
 
     Role getRoleById(int id);
 
