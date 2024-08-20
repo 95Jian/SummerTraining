@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface UserRoleService {
 
-    List<Integer> getRolesByUserId(int userId);
+    Integer getRolesByUserId(int userId);
 
     void addRoleToUser(int userId, int roleId);
 
@@ -12,7 +12,7 @@ public interface UserRoleService {
 
     boolean checkRoleExists(int userId, int roleId) ;
 
-    List<String> getRoleNameByUserId(int userId);
+    String getRoleNameByUserId(int userId);
 
-    void updateRoles(int userId, List<Integer> roleIds);
+    void updateRole(int userId, Integer roleId);
 }

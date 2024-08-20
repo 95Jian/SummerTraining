@@ -24,9 +24,9 @@ public class UserRoleController {
     public Map<String, Object> getRolesByUserId(@PathVariable int userId) {
         Map<String, Object> response = new HashMap<>();
         try {
-            List<Integer> roleIds = userRoleService.getRolesByUserId(userId);
+            Integer roleId = userRoleService.getRolesByUserId(userId);
             response.put("success", true);
-            response.put("roles", roleIds);
+            response.put("roles", roleId);
         } catch (Exception e) {
             response.put("success", false);
             response.put("message", "Failed to get Roles by user ID");
@@ -40,10 +40,9 @@ public class UserRoleController {
 
         Map<String, Object> response = new HashMap<>();
         try {
-            List<String> roles = userRoleService.getRoleNameByUserId(userId);
-            sortStrings(roles);
+            String role = userRoleService.getRoleNameByUserId(userId);
             response.put("success", true);
-            response.put("roles", roles);
+            response.put("role", role);
         } catch (Exception e) {
             response.put("success", false);
             response.put("message", "Failed to get roles by user ID");
@@ -87,10 +86,10 @@ public class UserRoleController {
     }
 
     @PostMapping("/update/{userId}")
-    public Map<String, Object> addRoles(@PathVariable int userId, @RequestBody List<Integer> roles) {
+    public Map<String, Object> addRoles(@PathVariable int userId, @RequestBody Integer roleId) {
         Map<String, Object> response = new HashMap<>();
         try {
-            userRoleService.updateRoles(userId, roles);
+            userRoleService.updateRole(userId, roleId);
             response.put("success", true);
         } catch (Exception e) {
             response.put("success", false);

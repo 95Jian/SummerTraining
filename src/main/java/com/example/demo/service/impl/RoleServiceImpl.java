@@ -1,8 +1,10 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.entity.Role;
+import com.example.demo.entity.RolePermission;
 import com.example.demo.entity.User;
 import com.example.demo.mapper.RoleMapper;
+import com.example.demo.mapper.RolePermissionMapper;
 import com.example.demo.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,9 @@ public class RoleServiceImpl implements RoleService {
 
     @Autowired
     private RoleMapper roleMapper;
+
+    @Autowired
+    private RolePermissionMapper rolePermissionMapper;
 
     @Override
     public Role findByRolename(String name) {
@@ -47,7 +52,9 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public void deleteRole(int id) {
+
         roleMapper.deleteRole(id);
+        rolePermissionMapper.deleteRoleAllPermission(id);
     }
 
 

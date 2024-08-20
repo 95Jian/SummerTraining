@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.entity.User;
 import com.example.demo.mapper.UserMapper;
+import com.example.demo.mapper.UserRoleMapper;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private UserRoleMapper userRoleMapper;
 
     @Override
     public User findByUsername(String username) {
@@ -52,7 +56,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(int id) {
+
         userMapper.deleteById(id);
+        userRoleMapper.deleteUserAllRole(id);
     }
 
 

@@ -13,7 +13,7 @@ public interface UserRoleMapper extends BaseMapper<UserRole> {
 
 
     @Select("SELECT roleId FROM user_role WHERE userId = #{userId}")
-    List<Integer> findRoldIdByUserId(int userId);
+    Integer findRoldIdByUserId(int userId);
 
     @Insert("INSERT INTO user_role(userId, roleId, createTime) " +
             "VALUES(#{userId}, #{roleId}, #{createTime})")
@@ -33,7 +33,7 @@ public interface UserRoleMapper extends BaseMapper<UserRole> {
             "FROM user_role ur " +
             "JOIN role r ON ur.roleId = r.id " +
             "WHERE ur.userId = #{userId}")
-    List<String> getRoleNameByUserId(int userId);
+    String getRoleNameByUserId(int userId);
 
 
 

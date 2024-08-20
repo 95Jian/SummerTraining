@@ -17,19 +17,19 @@ public class UserRoleServiceImpl implements UserRoleService {
     private UserRoleMapper userRoleMapper;
 
     @Override
-    public void updateRoles(int userId, List<Integer> roleId) {
+    public void updateRole(int userId, Integer roleId) {
         userRoleMapper.deleteUserAllRole(userId);
-        for (Integer role : roleId) {
+
             UserRole userRole = new UserRole();
             userRole.setUserId(userId);
-            userRole.setRoleId(role);
+            userRole.setRoleId(roleId);
             userRole.setCreateTime(new Date());
             userRoleMapper.insertUserRole(userRole);
-        }
+
     }
 
     @Override
-    public List<String> getRoleNameByUserId(int userId) {
+    public String getRoleNameByUserId(int userId) {
         return userRoleMapper.getRoleNameByUserId(userId);
     }
 
@@ -37,7 +37,7 @@ public class UserRoleServiceImpl implements UserRoleService {
         return userRoleMapper.countRole(userId, roleID) > 0;
     }
 
-    public List<Integer> getRolesByUserId(int userId) {
+    public Integer getRolesByUserId(int userId) {
         return userRoleMapper.findRoldIdByUserId(userId);
     }
 
